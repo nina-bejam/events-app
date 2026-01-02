@@ -1,0 +1,14 @@
+mat-card {
+  margin: 24px auto;
+  padding: 16px;
+}
+
+table {
+  width: 100%;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}

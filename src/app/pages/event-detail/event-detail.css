@@ -1,0 +1,41 @@
+.event-cart {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.event-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.ticket-table th,
+.ticket-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.ticket-table th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+}
+
+.ticket-table tr:hover {
+  background-color: #fafafa;
+}
+
+button[mat-raised-button][disabled] {
+  background-color: #ccc;
+  color: #666;
+}

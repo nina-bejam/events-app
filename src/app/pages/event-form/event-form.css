@@ -1,0 +1,10 @@
+mat-card {
+  max-width: 600px;
+  margin: 24px auto;
+  padding: 16px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}

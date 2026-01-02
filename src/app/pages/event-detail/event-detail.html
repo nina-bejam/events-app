@@ -1,0 +1,55 @@
+<mat-card class="event-cart" *ngIf="event">
+  <img [src]="getSafeImageUrl()" [alt]="event.title" class="event-image" />
+
+  <h2>{{ event.title }}</h2>
+  <p><strong>Datum:</strong> {{ event.date | date: 'fullDate' }}</p>
+  <p><strong>Ort:</strong> {{ event.location }}</p>
+
+  <p *ngIf="event.description">
+    {{ event.description }}
+  </p>
+
+  <div class="ticket-section">
+    <h3>Tickets</h3>
+
+    <table class="ticket-table" *ngIf="event.tickets?.length; else noTickets">
+      <tr>
+        <th>Typ</th>
+        <th>Preis (€)</th>
+        <th>Verfügbar</th>
+        <th>Auswahl</th>
+      </tr>
+
+      <tr *ngFor="let ticket of event.tickets">
+        <td>{{ ticket.name }}</td>
+        <td>{{ ticket.price }}</td>
+        <td>{{ ticket.available }}</td>
+        <td>
+          <input
+            type="radio"
+            name="selectedTicket"
+            [value]="ticket"
+            [(ngModel)]="selectedTicket"
+            [disabled]="ticket.available === 0"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <ng-template #noTickets>
+      <p>Keine Tickets verfügbar.</p>
+    </ng-template>
+
+    <div style="margin-top: 1.5rem;">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)=" reserveTicket(selectedTicket)"
+      >
+        Reservieren
+      </button>
+    </div>
+  </div>
+</mat-card>
+
+<p *ngIf="!event">Event wurde nicht gefunden.</p>

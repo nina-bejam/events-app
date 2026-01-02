@@ -1,0 +1,36 @@
+<mat-card *ngIf="!isLoading && event; else loading">
+  <h2>Ticket Reservierung</h2>
+
+  <p>
+    <strong>Event:</strong> {{ event.title }}<br />
+    <strong>Ort:</strong> {{ event.location }}<br />
+    <strong>Datum:</strong> {{ event.date | date: 'fullDate' }}
+  </p>
+
+  <h3>Ausgewähltes Ticket</h3>
+
+  <div *ngIf="selectedTicket; else noTicket">
+    <p>
+      <strong>Typ:</strong> {{ selectedTicket.name }}<br />
+      <strong>Preis:</strong> {{ selectedTicket.price }}€<br />
+      <strong>Verfügbar:</strong> {{ selectedTicket.available }}
+    </p>
+  </div>
+
+  <ng-template #noTicket>
+    <p>Kein Ticket ausgewählt.</p>
+  </ng-template>
+
+  <div class="buttons">
+    <button mat-raised-button color="primary" (click)="confirmReservation()">
+      Bestätigen
+    </button>
+    <button mat-stroked-button color="warn" (click)="cancelReservation()">
+      Abbrechen
+    </button>
+  </div>
+</mat-card>
+
+<ng-template #loading>
+  <p>Lade Ticketinformationen...</p>
+</ng-template>

@@ -1,0 +1,76 @@
+<mat-card>
+  <h2>Neue Veranstaltung anlegen</h2>
+
+  <form #eventForm="ngForm" (ngSubmit)="onSubmit(eventForm)">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Titel *</mat-label>
+      <input matInput name="title" required [(ngModel)]="model.title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Ort</mat-label>
+      <input matInput name="location" [(ngModel)]="model.location" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Datum *</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        name="date"
+        required
+        [(ngModel)]="model.date"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Beschreibung</mat-label>
+      <textarea
+        matInput
+        name="description"
+        rows="3"
+        [(ngModel)]="model.description"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Bild-URL *</mat-label>
+      <input
+        matInput
+        name="imageUrl"
+        required
+        [(ngModel)]="model.imageUrl"
+        placeholder="https://example.com/image.jpg"
+        pattern="https?://.+\.(jpg|jpeg|png|gif|webp)$"
+      />
+      <mat-error *ngIf="eventForm.submitted && !eventForm.controls['imageUrl']?.valid">
+        Bitte geben Sie eine gültige Bild-URL ein (z.B. https://...jpg)
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Ticket-Link</mat-label>
+      <input
+        matInput
+        name="ticketLink"
+        [(ngModel)]="model.ticketLink"
+        placeholder="https://example.com/ticket"
+        pattern="https?://.+"
+      />
+      <mat-error *ngIf="eventForm.submitted && !eventForm.controls['ticketLink']?.valid">
+        Bitte geben Sie eine gültige URL ein (z.B. https://...)
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="eventForm.invalid || isSaving"
+    >
+      {{ isSaving ? 'Speichern…' : 'Speichern' }}
+    </button>
+  </form>
+</mat-card>
